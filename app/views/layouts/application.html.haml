@@ -1,0 +1,66 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Bookers
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %header.navbar.navbar-fixed-top.navbar-inverse
+      .container
+        %nav.nav.navbar-brand.navbar-left
+          %span.bookers Bookers
+        %nav
+          %ul.nav.navbar-nav.navbar-right
+            - if user_signed_in?
+              %li
+                = link_to user_path(current_user)  do
+                  %i.glyphicon.glyphicon-home.home>
+                   Home
+              %li
+                = link_to users_path do
+                  %i.glyphicon.glyphicon-user.users>
+                   Users
+              %li
+                = link_to books_path do
+                  %i.glyphicon.glyphicon-book.books>
+                   Books
+              %li
+                = link_to destroy_user_session_path, method: :delete do
+                  %i.glyphicon.glyphicon-log-out.logout>
+                   logout
+            - else
+              %li
+                = link_to root_path do
+                  %i.glyphicon.glyphicon-home.home>
+                   Home
+              %li
+                = link_to home_about_path do
+                  %i.glyphicon.glyphicon-link.about>
+                   About
+              %li
+                = link_to new_user_registration_path do
+                  %i.glyphicon.glyphicon-edit.sign_up>
+                   Sign up
+              %li
+                = link_to new_user_session_path do
+                  %i.glyphicon.glyphicon-log-in.sign_in>
+                   login
+    %main
+      - if user_signed_in?
+        .container.search
+          = form_tag(search_path, method: :get) do
+            = select_tag 'range' ,options_for_select([['---選択してください---', ''], ['User', '1'], ['Book', '2']])
+            = select_tag 'search', options_for_select([["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]])
+            = text_field_tag (:word)
+            = submit_tag "検索"
+      .container.flash
+        = render 'layouts/flash_messages'
+      = yield
+    %footer
+      .container
+        .row
+          .col-xs-3.col-xs-offset-9
+            %p CopyRight Infratop.inc

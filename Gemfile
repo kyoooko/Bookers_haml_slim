@@ -87,3 +87,5 @@ gem "geocoder"
 gem 'whenever', require: false
 # 追記（静的コード解析ツール）
 gem 'rubocop-airbnb'
+# 追記（Haml）
+gem "haml-rails"
