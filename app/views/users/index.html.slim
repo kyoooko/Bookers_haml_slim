@@ -1,0 +1,14 @@
+.container.main-container
+  p#notice
+  .row
+    .col-xs-3
+      h2
+        | User info
+      = render 'info', user: current_user
+      h2
+        | New book
+      = render 'books/create_book_form', book: @book
+    .col-xs-9
+      h2
+        | Users
+      = render 'index',users: @users

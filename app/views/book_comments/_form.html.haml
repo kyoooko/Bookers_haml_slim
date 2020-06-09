@@ -1,0 +1,5 @@
+= form_with(model: [book, book_comment]) do |f|
+  .row
+    .col-sm-11
+      = f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに"
+  = f.submit "送信", class: "btn btn-default  pull-right col-sm-1"

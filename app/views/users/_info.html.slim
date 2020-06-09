@@ -1,0 +1,36 @@
+table.table
+  tbody
+    tr
+      = attachment_image_tag user, :profile_image, size: "100x100",format: 'jpeg', class: "profile-img", fallback: "no_image.jpg"
+    tr
+      th
+        | name
+      th
+        = user.name
+    tr
+      th
+        | introduction
+      th
+        = user.introduction
+    - # フォロー機能
+    tr
+      th
+        | follows
+      th
+        = link_to "/users/#{user.id}/follows",class:"books_show" do
+          = user.followings.count
+    tr
+      th
+        | followers
+      th
+        = link_to "/users/#{user.id}/followers",class:"books_show" do
+          = user.followers.count
+- if current_user != user
+  - # フォローボタン
+  .row
+    = render 'relationships/follow_button', user: user
+  - # チャット
+  = link_to 'chatを始める', chat_path(user.id)
+- # ユーザー編集ボタン
+.row
+  = link_to "",edit_user_path(user.id), class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench"

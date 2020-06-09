@@ -1,0 +1,35 @@
+head
+  style
+    |  /* create,user_update,book_update */ .create,.user_update,.book_update{ margin:10px 0; font-size: 13px; line-height: 18px; } /* alert_cretate */ .alert_create{ color:#FD1716; } .alert_create ul{ list-style-type: disc; font-size: 13px; line-height: 18px; margin-left: 33px; } /* divaseのflashメッセージ */ .flash_alert { color:red; } .flash_notice { color: green; } 
+body
+  - flash.each do |message_type, message|
+    - # divaseのflashメッセージ
+    - flash.each do |key, value|
+      = content_tag(:div, value, class: "flash flash_#{key}")
+    - # ログイン中
+    - if flash[:create]
+      .create
+        = message
+        p
+          | You have creatad book successfully.
+    - if flash[:alert_create]
+      .alert_create
+        = message
+        h3
+          = pluralize(@book.errors.count, "error")
+          |  errors prohibited this obj from being saved:
+        ul
+          li
+            | Title can't be blank
+          li
+            | Body can't be blank
+    - if flash[:user_update]
+      .user_update
+        = message
+        p
+          | You have updatad user successfully.
+    - if flash[:book_update]
+      .book_update
+        = message
+        p
+          | You have updated book successfully.

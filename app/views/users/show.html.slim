@@ -1,0 +1,38 @@
+.container.main-container
+  p#notice
+  .row
+    .col-xs-3
+      h2
+        | User info
+      = render 'info', user: @user,now: ''
+      h2
+        | New book
+      = render 'books/create_book_form', book: @book
+    .col-xs-9.container
+      = render 'books/books', books: @books
+  - if @user == current_user
+    .row.map-field
+      .col-xs-12
+        h2
+          | Your Map
+        p.adress
+          | 住所： 〒
+          = @user.postal_code
+          |  
+          - @user.prefecture_code
+          |  
+          = @user.city
+          |  
+          = @user.street
+        p
+          - @user.address
+        - # Google マップ
+        |  <div id='map' class="
+        = @user.prefecture_code.to_s + @user.city + @user.street
+        | "> 
+- # Google マップ(JS)
+script[sec="javascripts/address_map.js"]
+|  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=
+= ENV['GOOGLE_MAP_API_KEY']
+| &callback=initMap" async defer>
+- # <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7wALtCD2-jLMnFfdOUaxxfvOtA_wKqs8&callback=initMap" async defer></script>

@@ -1,0 +1,10 @@
+%h2 Everyday Bookers!!
+%hr/
+- @all_users.each do |user|
+  %p
+    = user.name
+    様
+  %p
+    Your page is ...#{"http://localhost:3000/users/#{user.id}"}
+%hr/
+%p By Bookers運営局

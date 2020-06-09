@@ -1,0 +1,11 @@
+= form_for(book) do |f|
+  .field.row
+    = f.label :title
+    %br/
+    = f.text_field :title, autofocus: true, class:"col-xs-12 book_title",id:"book_title"
+  .field.row
+    = f.label :body,"Opinion"
+    %br/
+    = f.text_area :body, autofocus: true,class:"col-xs-12 book_body",id:"book_body"
+  .actions.row
+    = f.submit "Create Book",class:"btn btn-primary col-xs-12" ,data: { disable_with: "Sign up" }

@@ -1,0 +1,41 @@
+.container.main-container
+  %p#notice
+  .row
+    / 左側 上
+    .col-xs-3
+      %h2 User info
+      = render 'users/info', user: @book.user
+      / 左側 下
+      %h2 New book
+      = render 'create_book_form', book: @create_book
+    .col-xs-9.container
+      %h2 Book detail
+      %table.table
+        %thead
+          %tr
+            %th
+            %th Title
+            %th Opinion
+            %th{:colspan => "3"}
+        %tbody
+          %tr
+            %td
+              %div
+                = link_to user_path(@book.user.id) do
+                  = attachment_image_tag @book.user, :profile_image, size: "100x100", format: 'jpeg', class: " profile-img", fallback: "no_image.jpg", size:'50x50'
+              %div
+                = link_to @book.user.name, user_path(@book.user.id), class: "text-muted user-name"
+            %td
+              = link_to book_path(@book.id),class:"books-show" do
+                = @book.title
+            %td= @book.body
+            - if @book.user == current_user
+              %td
+                = link_to "Edit",edit_book_path(@book.id),class:"btn-sm btn-success"
+              %td
+                = link_to "Destroy", book_path(@book.id), method: :delete, class:"btn-sm btn-danger",data:{confirm:"本当に消しますか？"}
+            %td{:class => "book_#{@book.id}"}
+              = render 'books/book', book: @book
+      %ul.comments_area.row
+        = render 'book_comments/index', book: @book
+      = render 'book_comments/form',{ book: @book, book_comment: @book_comment }

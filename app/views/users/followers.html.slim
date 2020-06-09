@@ -1,0 +1,32 @@
+.container
+  - if @user.followers.count > 0
+    h2
+      | Follower Users
+    table.table
+      thead
+        tr
+          th
+            | image
+          th
+            | name
+          th[colspan="3"]
+      tbody
+        - @user.followers.each do |followers|
+          tr
+            td
+              = attachment_image_tag followers, :profile_image, size: "40x40", format: 'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg"
+            td
+              =followers.name
+            td
+              | フォロー数：
+              = followers.followings.count
+            td
+              | フォロワー数：
+              = followers.followers.count
+            td
+              = render 'relationships/follow_button', user: followers
+            td
+              =link_to"Show", user_path(followers.id),class:"followers_show"
+  - else
+    h2
+      | No Follower User

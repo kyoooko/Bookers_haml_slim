@@ -1,0 +1,12 @@
+.container.main-container
+  p#notice
+  .row
+    .col-md-6.col-md-offset-3
+      h1
+        | Editing Book
+      = render 'create_book_form', book: @book
+      .link
+        =link_to "Show",book_path(@book.id),class:"show"
+        |  | 
+        =link_to "Back",books_path, class:"back"
+    .col-md-3

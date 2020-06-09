@@ -1,0 +1,20 @@
+!!!
+%html{:lang => "ja"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "text/html; charset=UTF-8"}/
+    :css
+      h2,p{
+      color:#215c89;
+      }
+  %body
+    %h2
+      Dear #{@user.name}
+    %hr/
+    %p Welcome to Bookers!!
+    %p Thank you for registering!
+    %p
+      Your page is ...#{@url}
+    %br/
+    %p By Bookers運営局
+    %hr/

@@ -1,0 +1,36 @@
+.container.main-container
+  p#notice
+  h2
+    | User info
+  = form_for(@user) do |f|
+    = render 'layouts/error_messages', model: f.object
+    .field
+      = f.label :name
+      br
+      = f.text_field :name, autofocus: true, autocomplete: "name",class:"name",id:"user_name"
+    .firld
+      = f.label :image
+      br
+      = f.attachment_field :profile_image,class: "user-edit-form"
+    .field
+      = f.label :introduction
+      br
+      = f.text_area :introduction, autofocus: true,class:"introduction"
+    - # #住所検索（JpPrefecture gem)
+    .field
+      = f.label :postal_code
+      br
+      = f.text_field :postal_code, autofocus: true, class: "postal_code", id: "address_zipcode"
+    .field
+      = f.label :prefecture_code
+      br
+      = f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name, class: "address"
+    .field
+      = f.label :city
+      br
+      = f.text_field :city, autofocus: true, class: "address", id:"address_city"
+    .field
+      = f.label :street
+      br
+      = f.text_field :street, autofocus: true, class: "address_street"
+    = f.submit "Update User",data: { disable_with: "Sign up" }

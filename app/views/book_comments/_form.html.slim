@@ -1,0 +1,7 @@
+- # ネストしてあるコントローラへのルーティングは、配列で二つ([関連元のインスタンス, 関連先のインスタンス])渡す必要がある
+- #= form_for [@book, @book_comment] do |f|
+  = form_with(model: [book, book_comment]) do |f|
+    .row
+      .col-sm-11
+        = f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに"
+    = f.submit "送信", class: "btn btn-default  pull-right col-sm-1"
