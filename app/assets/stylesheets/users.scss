@@ -1,0 +1,23 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "colors";
+// 右側Users一覧（_index）
+.users_show{
+  @include click-link
+}
+// (edit)
+.field{
+  margin-bottom: 10px;
+}
+// Google マップ（show) 
+.map-field{
+  margin-top:30px;
+}
+.adress{
+   margin-top:30px;
+}
+#map {
+      height: 600px;
+      width: 600px;
+    }

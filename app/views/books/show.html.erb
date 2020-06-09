@@ -1,0 +1,64 @@
+<div class="container main-container">
+  <p id="notice"></p>
+  <div class="row">
+    <!-- 左側 上-->
+    <div class="col-xs-3">
+      <h2>User info</h2>
+      <%= render 'users/info', user: @book.user %>
+    <!-- 左側 下-->
+      <h2>New book</h2>
+      <%= render 'create_book_form', book: @create_book %>
+    </div>
+  <%# 右側 %>
+    <div class="col-xs-9 container">
+      <h2>Book detail</h2>
+      <table class="table">
+        <thead>
+          <tr> 
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div>
+                <%=link_to user_path(@book.user.id) do %>
+                  <%= attachment_image_tag @book.user, :profile_image, size: "100x100", format: 'jpeg', class: " profile-img", fallback: "no_image.jpg", size:'50x50' %>
+                <% end %>
+              </div>
+              <div>
+                <%=link_to @book.user.name, user_path(@book.user.id), class: "text-muted user-name" %>
+              </div> 
+            </td>
+            <td> <%= link_to book_path(@book.id),class:"books-show" do %><%= @book.title %><% end %></td>
+            <td><%= @book.body %></td>
+
+            <% if @book.user == current_user %>
+              <td>
+                <%= link_to "Edit",edit_book_path(@book.id),class:"btn-sm btn-success" %>
+              </td>
+              <td>
+                <%= link_to "Destroy", book_path(@book.id), method: :delete, class:"btn-sm btn-danger",data:{confirm:"本当に消しますか？"} %>
+              </td>
+            <% end %>
+            <%# いいね %>
+            <td class="book_<%= @book.id %>">
+              <%= render 'books/book', book: @book %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <%# コメント一覧 %>
+      <ul class="comments_area row">
+        <%= render 'book_comments/index', book: @book %>
+      </ul>
+      <%# コメント入力 %>
+      <%= render 'book_comments/form',{ book: @book, book_comment: @book_comment } %>
+    </div>
+  </div> 
+</div>
+
+

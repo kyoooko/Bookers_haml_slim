@@ -1,0 +1,4 @@
+<%# .appendは引数を追加するメソッド %>
+$('.message').append("<p style='text-align: right; color:#bc7395;'><%= @chat.message %></p>");
+<%# valメソッドはコメント送信後のコメント入力フォームを空に %>
+$('input[type=text]').val("")

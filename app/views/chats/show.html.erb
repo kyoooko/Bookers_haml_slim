@@ -1,0 +1,40 @@
+<header>
+ <style>
+ .chat-container{
+   padding:30px 150px 30px 80px;
+   /* background-color:gray;  */
+ }
+  .message{
+    width: 70%;
+    background-color:#e8ebed;
+    border-radius:8px;
+    padding:30px;
+    margin-bottom:30px;
+  }
+  .chat-form{
+    float:right;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="chat-header"><%= @user.name%>さんとのチャット</h2>
+    <div class="row chat-container">
+      <div class="message" >
+        <% @chats.each do |chat| %>
+          <% if chat.user_id == current_user.id %>
+            <p style="text-align: right; color:#bc7395;"><%= chat.message %></p>
+          <% else %>
+            <p style="text-align: left; color:#355384;"><%= chat.message %></p>
+          <% end %>
+        <% end %>
+      </div>
+
+      <%= form_with model: @chat, data: {remote: true},class:"chat-form" do |f| %>
+        <%= f.text_field :message %>
+        <%= f.hidden_field :room_id %>
+      <% end %>
+    </div>
+  </div>
+</body>

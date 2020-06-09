@@ -1,0 +1,74 @@
+<head>
+  <style>
+  /* create,user_update,book_update */
+    .create,.user_update,.book_update{
+      margin:10px 0;
+      font-size: 13px;
+      line-height: 18px;
+    }
+  /* alert_cretate */
+    .alert_create{
+      color:#FD1716;
+    }
+    .alert_create ul{
+      list-style-type: disc;
+      font-size: 13px;
+      line-height: 18px;
+      margin-left: 33px;
+    }
+    /* divaseのflashメッセージ */
+    .flash_alert {
+      color:red;
+    }
+    .flash_notice {
+      color: green;      
+    }
+  </style>
+</head>
+
+<body>
+  <% flash.each do |message_type, message| %>
+
+    <%# divaseのflashメッセージ %>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "flash flash_#{key}") %>
+    <% end %>
+
+
+    <%# ログイン中 %>
+    <% if flash[:create] %>
+      <div class="create">
+        <%= message %>
+        <p>You have creatad book successfully.</p>
+      </div>
+    <% end %>
+
+    <% if flash[:alert_create] %>
+      <div class="alert_create">
+        <%= message %>
+        <h3><%= pluralize(@book.errors.count, "error") %> errors prohibited this obj from being saved:</h3>
+        <ul>
+          <li>Title can't be blank</li>
+          <li>Body can't be blank</li>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if flash[:user_update] %>
+      <div class="user_update">
+        <%= message %>
+        <p>You have updatad user successfully.</p>
+      </div>
+    <% end %>
+
+
+    <% if flash[:book_update] %>
+      <div class="book_update">
+        <%= message %>
+        <p>You have updated book successfully.</p>
+      </div>
+    <% end %>
+
+  <% end %>
+</body>
+

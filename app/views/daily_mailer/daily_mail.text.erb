@@ -1,0 +1,10 @@
+===============================
+Everyday Bookers!!
+===============================
+<% @all_users.each do |user| %>
+  <p><%= user.name %>様</p>
+  <p>Your page is ...<%= "http://localhost:3000/users/#{user.id}" %></p>
+<% end %>
+
+By Bookers Team
+    

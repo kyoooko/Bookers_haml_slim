@@ -1,0 +1,14 @@
+$text:#666;
+$text-white:#fff;
+$hover-text:#337ab7;
+$back-black:#000;
+
+@mixin click-link{
+  &:visited{
+    color:$text;
+    }
+  &:hover{
+    color: $hover-text;
+    background-color:$back-black;
+    }
+}

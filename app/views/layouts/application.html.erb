@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header class="navbar navbar-fixed-top navbar-inverse ">
+      <div class="container">
+        <nav class="nav navbar-brand navbar-left">
+          <span class="bookers">Bookers</span>
+        </nav>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+                  <li class="">
+                    <%= link_to user_path(current_user)  do %><i class="glyphicon glyphicon-home home"></i>&emsp;Home<% end %>
+                  </li>
+                  <li>
+                    <%= link_to users_path do %><i class="glyphicon glyphicon-user users"></i>&emsp;Users<% end %>
+                  </li>
+                  <li>
+                    <%= link_to books_path do %><i class="glyphicon glyphicon-book books"></i>&emsp;Books<% end %>
+                  </li>
+                  <li>
+                    <%= link_to destroy_user_session_path, method: :delete do %><i class="glyphicon glyphicon-log-out logout"></i>&emsp;logout<% end %>
+                  </li>
+                <% else %>
+                  <li class="">
+                  <%= link_to root_path do %><i class="glyphicon glyphicon-home home"></i>&emsp;Home<% end %>
+                  </li>
+                  <li class="">
+                    <%= link_to home_about_path do %><i class="glyphicon glyphicon-link about"></i>&emsp;About<% end %>
+                  </li>
+                  <li class="">
+                    <%= link_to new_user_registration_path do %><i class="glyphicon glyphicon-edit sign_up"></i>&emsp;Sign up<% end %>
+                  </li>
+                  <li class="">
+                    <%= link_to new_user_session_path do %><i class="glyphicon glyphicon-log-in sign_in"></i>&emsp;login<% end %>
+                  </li>
+                <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <%# 検索フォーム %>
+      <% if user_signed_in? %>
+        <div class="container search">
+          <%= form_tag(search_path, method: :get) do %>
+            <%= select_tag 'range' ,options_for_select([['---選択してください---', ''], ['User', '1'], ['Book', '2']]) %>
+            <%= select_tag 'search', options_for_select([["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
+            <%= text_field_tag (:word) %>
+            <%= submit_tag "検索" %>
+          <% end %>
+        </div>
+      <% end %>
+      <%# フラッシュメッセージ %>
+      <div class="container flash">
+        <%= render 'layouts/flash_messages' %>
+      </div>
+      <%# 各ページ本体 %>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-3 col-xs-offset-9">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer> 
+
+  </body>
+</html>

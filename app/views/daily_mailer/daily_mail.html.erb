@@ -1,0 +1,11 @@
+<h2>Everyday Bookers!!</h2>
+<hr />
+<% @all_users.each do |user| %>
+  <p><%= user.name %>様</p>
+  <p>Your page is ...<%= "http://localhost:3000/users/#{user.id}" %></p>
+<% end %>
+<hr />
+<p>By Bookers運営局</p>
+
+
+

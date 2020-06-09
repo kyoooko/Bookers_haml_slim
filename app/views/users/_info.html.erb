@@ -1,0 +1,38 @@
+  <table class="table">
+    <tbody>
+      <tr>
+        <%= attachment_image_tag user, :profile_image, size: "100x100",format: 'jpeg', class: "profile-img", fallback: "no_image.jpg" %>
+      </tr> 
+      <tr>
+        <th>name</th>
+        <th><%= user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= user.introduction %></th>
+      </tr>
+      <%# フォロー機能 %>
+      <tr>
+        <th>follows</th>
+        <th><%= link_to "/users/#{user.id}/follows",class:"books_show" do %><%= user.followings.count %><% end %></th>
+      </tr>
+      <tr>
+        <th>followers</th>
+        <th><%= link_to "/users/#{user.id}/followers",class:"books_show" do %><%= user.followers.count %><% end %></th>
+      </tr>
+    </tbody>
+  </table>
+
+  <% if current_user != user %>
+  <%# フォローボタン %>
+  <div class="row">
+      <%= render 'relationships/follow_button', user: user %>
+  </div>  
+  <%# チャット %>
+    <%= link_to 'chatを始める', chat_path(user.id)%>
+  <% end %>
+
+  <%# ユーザー編集ボタン %>
+  <div class="row">
+    <%= link_to "",edit_user_path(user.id), class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+  </div>
